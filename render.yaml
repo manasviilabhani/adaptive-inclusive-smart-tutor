@@ -1,0 +1,24 @@
+# Render Blueprint: one web service (frontend + API) and a PostgreSQL database.
+# Deploy: render.com -> New -> Blueprint -> pick this repo. Pushes to main redeploy automatically.
+services:
+  - type: web
+    name: adaptive-tutor
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/grades
+    envVars:
+      - key: DB_HOST
+        fromDatabase: { name: adaptive-tutor-db, property: host }
+      - key: DB_PORT
+        fromDatabase: { name: adaptive-tutor-db, property: port }
+      - key: DB_NAME
+        fromDatabase: { name: adaptive-tutor-db, property: database }
+      - key: DB_USERNAME
+        fromDatabase: { name: adaptive-tutor-db, property: user }
+      - key: DB_PASSWORD
+        fromDatabase: { name: adaptive-tutor-db, property: password }
+
+databases:
+  - name: adaptive-tutor-db
+    databaseName: adaptive_tutor
+    plan: free

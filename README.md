@@ -27,6 +27,18 @@ npm run dev
 
 Run the tests (RL engine, completion, lesson composer, curriculum answers): `cd backend && mvn test`
 
+## Deploy (Render)
+
+The repo includes a `Dockerfile` (builds the React app into the Spring Boot jar, so one service serves both)
+and a `render.yaml` Blueprint (web service + PostgreSQL, free plan).
+
+1. Sign in at [render.com](https://render.com) with GitHub.
+2. **New → Blueprint**, pick this repo, click **Apply**.
+3. When the build finishes, open the `adaptive-tutor` service URL (`https://adaptive-tutor-xxxx.onrender.com`).
+
+Every push to `main` redeploys automatically. On the free plan the service sleeps after ~15 min idle
+(first visit then takes ~30–60 s) and the free database expires after ~30 days.
+
 ## Project layout
 
 ```
